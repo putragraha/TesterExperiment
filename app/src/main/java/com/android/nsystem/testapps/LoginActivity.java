@@ -11,10 +11,11 @@ import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, LoginContract.View, TextWatcher {
 
-    private EditText mUsername, mPassword;
+    private EditText mUsername;
+    private EditText mPassword;
+
     private Button mLogin;
 
-    private Account mAccount;
     private LoginContract.Presenter mLoginPresenter;
 
     @Override
@@ -31,13 +32,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mLogin = findViewById(R.id.login);
         mLogin.setOnClickListener(this);
 
-        mAccount = new Account();
         mLoginPresenter = new LoginPresenter(this);
     }
 
     @Override
     public void onClick(View view) {
-        mLoginPresenter.submitLogin(mAccount);
+        mLoginPresenter.submitLogin(
+            new Account(
+                mUsername.getText().toString(),
+                mPassword.getText().toString()
+            )
+        );
     }
 
     @Override
@@ -69,22 +74,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
-
+        // No implementation
     }
 
     @Override
     public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
-        mAccount.setUsername(mUsername.getText().toString());
-        mAccount.setPassword(mPassword.getText().toString());
-        mLoginPresenter.loginInputTextChanged(mAccount);
+        mLoginPresenter.loginInputTextChanged(
+            new Account(
+                mUsername.getText().toString(),
+                mPassword.getText().toString()
+            )
+        );
     }
 
     @Override
     public void afterTextChanged(Editable editable) {
-
-    }
-
-    public void setLoginPresenter(LoginContract.Presenter loginPresenter) {
-        this.mLoginPresenter = loginPresenter;
+        // No implementation
     }
 }
