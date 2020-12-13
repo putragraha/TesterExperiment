@@ -12,7 +12,5 @@ Instrument Test Library which test interaction and functionality of Android Appl
 Unit Test Library which test the functionality of the code logic
 
 ## Tech Stack
-- Java Language
-- Android SDK version : 28
 - Instrumental Test : Espresso
 - Unit Test : Mockito
