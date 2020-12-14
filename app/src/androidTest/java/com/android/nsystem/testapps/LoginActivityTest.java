@@ -15,6 +15,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.isEnabled;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.Matchers.not;
 
+// TODO (Putra): 14/12/20 Fix this test later
 public class LoginActivityTest {
 
     private static final String INPUT = "input";
