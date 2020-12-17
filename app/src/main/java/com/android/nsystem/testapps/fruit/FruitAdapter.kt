@@ -46,7 +46,7 @@ class FruitAdapter: ListAdapter<Fruit, FruitAdapter.FruitViewHolder>(DIFF_CALLBA
 
         private val binding = ItemFruitBinding.bind(itemView)
 
-        fun bind(fruit: Fruit) = binding.tvItem.run {
+        fun bind(fruit: Fruit) = binding.actvItem.run {
             text = fruit.name
             setCompoundDrawablesWithIntrinsicBounds(fruit.image, 0, 0, 0)
         }

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Test Apps</string>
     <string name="content_image">Content Image</string>
+    <string name="fruit">Fruit</string>
 </resources>

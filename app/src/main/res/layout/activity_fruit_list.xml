@@ -17,6 +17,16 @@
         app:srcCompat="@drawable/fruit"
         android:contentDescription="@string/content_image"/>
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/actv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textSize="24sp"
+        android:text="@string/fruit"
+        app:layout_constraintStart_toStartOf="@id/aciv_content"
+        app:layout_constraintBottom_toBottomOf="@id/aciv_content"/>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_message"
         android:layout_width="55dp"
