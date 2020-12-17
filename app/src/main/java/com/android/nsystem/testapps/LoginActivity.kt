@@ -1,11 +1,13 @@
 package com.android.nsystem.testapps
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.nsystem.testapps.databinding.ActivityMainBinding
+import com.android.nsystem.testapps.fruit.FruitListActivity
 
 /**
  * @author Putra Nugraha (putra.nugraha@dana.id)
@@ -44,7 +46,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     }
 
     override fun notifyLoginValid() {
-        Toast.makeText(this, "Welcome....", Toast.LENGTH_LONG).show()
+        startActivity(Intent(this, FruitListActivity::class.java))
     }
 
     override fun clearLoginInput() {
