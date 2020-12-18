@@ -11,7 +11,14 @@ class FruitListPresenter(private val view: FruitListContract.View): FruitListCon
     private val fruitMock by lazy {
         listOf(
             Fruit("Banana", R.drawable.banana),
-            Fruit("Grapres", R.drawable.grapes),
+            Fruit("Grapes", R.drawable.grapes),
+            Fruit("Pineapple", R.drawable.pineapple),
+            Fruit("Strawberry", R.drawable.strawberry),
+            Fruit("Banana", R.drawable.banana),
+            Fruit("Grapes", R.drawable.grapes),
+            Fruit("Pineapple", R.drawable.pineapple),
+            Fruit("Strawberry", R.drawable.strawberry),
+            Fruit("Grapes", R.drawable.grapes),
             Fruit("Pineapple", R.drawable.pineapple),
             Fruit("Strawberry", R.drawable.strawberry),
             Fruit("Watermelon", R.drawable.watermelon)
