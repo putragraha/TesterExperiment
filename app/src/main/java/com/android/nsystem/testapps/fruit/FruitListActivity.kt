@@ -1,11 +1,21 @@
 package com.android.nsystem.testapps.fruit
 
-import androidx.appcompat.app.AppCompatActivity
+import android.Manifest
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.nsystem.testapps.databinding.ActivityFruitListBinding
+import java.util.Locale
 
 class FruitListActivity : AppCompatActivity(), FruitListContract.View {
+
+    companion object {
+
+        const val MAP_REQUEST_CODE = 1
+    }
 
     private lateinit var binding: ActivityFruitListBinding
 
@@ -41,5 +51,29 @@ class FruitListActivity : AppCompatActivity(), FruitListContract.View {
             layoutManager = LinearLayoutManager(this@FruitListActivity)
             adapter = fruitAdapter
         }
+        requestMapPermission()
+        binding.fabMessage.setOnClickListener { openMap() }
+    }
+
+    private fun requestMapPermission() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+            MAP_REQUEST_CODE
+        )
+    }
+
+    private fun openMap() {
+        startActivity(
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse(String.format(
+                    Locale.ENGLISH,
+                    "geo:%f,%f",
+                    0.5348769939376866,
+                    101.44729466832969)
+                )
+            )
+        )
     }
 }
