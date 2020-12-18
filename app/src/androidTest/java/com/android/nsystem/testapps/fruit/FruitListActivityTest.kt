@@ -1,5 +1,6 @@
 package com.android.nsystem.testapps.fruit
 
+import android.content.Intent
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
@@ -8,17 +9,19 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.Intents.intended
-import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
+import androidx.test.espresso.intent.matcher.IntentMatchers.*
 import androidx.test.espresso.matcher.BoundedMatcher
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.android.nsystem.testapps.R
 import org.hamcrest.Description
 import org.hamcrest.Matcher
+import org.hamcrest.Matchers.allOf
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import java.util.*
 
 /**
  * @author Putra Nugraha (putra.nugraha@dana.id)
@@ -104,6 +107,25 @@ class FruitListActivityTest {
 
         // then
         intended(hasComponent(FruitDetailActivity::class.java.name))
+    }
+
+    @Test // Intent
+    fun fab_shouldOpen_Map() {
+        // given
+
+        // when
+        onView(withId(R.id.fab_message)).perform(click())
+
+        // then
+        intended(allOf(
+            hasAction(Intent.ACTION_VIEW),
+            hasData(String.format(
+                Locale.ENGLISH,
+                "geo:%f,%f",
+                0.5348769939376866,
+                101.44729466832969)
+            ))
+        )
     }
 
     private fun hasFruitDataForPosition(position: Int, fruit: Fruit): Matcher<View> {

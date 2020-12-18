@@ -1,5 +1,6 @@
 package com.android.nsystem.testapps.fruit
 
+import android.content.Intent
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.*
 import androidx.test.espresso.action.ViewActions.click
@@ -9,9 +10,12 @@ import androidx.test.espresso.assertion.PositionAssertions.isCompletelyAbove
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.intent.Intents
+import androidx.test.espresso.intent.Intents.intended
+import androidx.test.espresso.intent.matcher.IntentMatchers.*
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.android.nsystem.testapps.R
+import org.hamcrest.Matchers.allOf
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -94,6 +98,21 @@ class FruitDetailActivityTest {
 
         // then
         onView(withId(R.id.aciv_fruit_image)).check(isCompletelyAbove(withId(R.id.actv_fruit_name)))
+    }
+
+    @Test // Intent
+    fun actionShare_shouldOpen_IntentAction_Share() {
+        // given
+
+        // when
+        onView(withId(R.id.action_share)).perform(click())
+
+        // then
+        intended(allOf(
+            hasType("text/plain"),
+            hasAction(Intent.ACTION_SEND),
+            hasExtra(Intent.EXTRA_TEXT, watermelon)
+        ))
     }
 
     private fun openDetailActivity() {
