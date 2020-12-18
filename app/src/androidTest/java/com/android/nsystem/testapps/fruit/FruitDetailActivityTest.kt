@@ -25,7 +25,7 @@ class FruitDetailActivityTest {
 
     private val watermelon by lazy { "Watermelon" }
 
-    @get:Rule
+    @Rule @JvmField
     val fruitListActivity = ActivityScenarioRule(FruitListActivity::class.java)
 
     @Before

@@ -3,7 +3,6 @@ package com.android.nsystem.testapps.fruit
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.Espresso.pressBack
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
@@ -27,7 +26,7 @@ import org.junit.Test
  */
 class FruitListActivityTest {
 
-    @get:Rule
+    @Rule @JvmField
     val fruitListActivity = ActivityScenarioRule(FruitListActivity::class.java)
 
     @Before
