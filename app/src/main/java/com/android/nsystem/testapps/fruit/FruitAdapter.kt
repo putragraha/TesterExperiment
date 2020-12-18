@@ -13,7 +13,9 @@ import com.android.nsystem.testapps.databinding.ItemFruitBinding
  * @author Putra Nugraha (putra.nugraha@dana.id)
  * @version FruitAdapter, v 0.1 17/12/20 12.31 by Putra Nugraha
  */
-class FruitAdapter: ListAdapter<Fruit, FruitAdapter.FruitViewHolder>(DIFF_CALLBACK) {
+class FruitAdapter(
+    private val listener: (Fruit) -> Unit
+): ListAdapter<Fruit, FruitAdapter.FruitViewHolder>(DIFF_CALLBACK) {
 
     companion object {
 
@@ -34,7 +36,8 @@ class FruitAdapter: ListAdapter<Fruit, FruitAdapter.FruitViewHolder>(DIFF_CALLBA
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FruitViewHolder {
         return FruitViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_fruit, parent, false)
+                .inflate(R.layout.item_fruit, parent, false),
+            listener
         )
     }
 
@@ -42,11 +45,15 @@ class FruitAdapter: ListAdapter<Fruit, FruitAdapter.FruitViewHolder>(DIFF_CALLBA
         holder.bind(getItem(position))
     }
 
-    inner class FruitViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    inner class FruitViewHolder(
+        itemView: View,
+        private val listener: (Fruit) -> Unit
+    ): RecyclerView.ViewHolder(itemView) {
 
         private val binding = ItemFruitBinding.bind(itemView)
 
         fun bind(fruit: Fruit) = binding.actvItem.run {
+            setOnClickListener { listener(fruit) }
             text = fruit.name
             setCompoundDrawablesWithIntrinsicBounds(fruit.image, 0, 0, 0)
         }

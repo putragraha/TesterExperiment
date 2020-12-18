@@ -25,7 +25,15 @@ class FruitListActivity : AppCompatActivity(), FruitListContract.View {
     }
 
     private fun setupComponent() {
-        fruitAdapter = FruitAdapter()
+        fruitAdapter = FruitAdapter { fruit ->
+            FruitDetailActivity.startActivity(
+                this,
+                Bundle().apply {
+                    putString(FruitDetailActivity.FRUIT_NAME, fruit.name)
+                    putInt(FruitDetailActivity.FRUIT_IMAGE, fruit.image)
+                }
+            )
+        }
         presenter = FruitListPresenter(this).apply {
             getData()
         }
