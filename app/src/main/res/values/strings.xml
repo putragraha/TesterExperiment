@@ -3,4 +3,5 @@
     <string name="content_image">Content Image</string>
     <string name="fruit">Fruit</string>
     <string name="share">Share</string>
+    <string name="webview">Webview</string>
 </resources>

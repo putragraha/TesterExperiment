@@ -20,6 +20,7 @@
         </activity>
         <activity android:name=".fruit.FruitListActivity" />
         <activity android:name=".fruit.FruitDetailActivity" />
+        <activity android:name=".webview.WebviewActivity" />
     </application>
 
 </manifest>

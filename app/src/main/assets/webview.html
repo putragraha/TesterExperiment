@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Document</title>
+</head>
+
+<body>
+<h1>Hello World</h1>
+<br/>
+<input id="field" type="text"/>
+<br/>
+<button onclick="send()" type="button">Submit</button>
+<br/>
+<br/>
+<p id="output">What's up?</p>
+</body>
+
+<script>
+    function send() {
+        document.getElementById("output").innerHTML = document.getElementById("field").value;
+    }
+</script>
+
+</html>

@@ -4,10 +4,14 @@ import android.Manifest
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.nsystem.testapps.R
 import com.android.nsystem.testapps.databinding.ActivityFruitListBinding
+import com.android.nsystem.testapps.webview.WebviewActivity
 import java.util.Locale
 
 class FruitListActivity : AppCompatActivity(), FruitListContract.View {
@@ -32,6 +36,21 @@ class FruitListActivity : AppCompatActivity(), FruitListContract.View {
 
     override fun onSuccessGetData(fruits: List<Fruit>) {
         fruitAdapter.submitList(fruits)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.fruit_list_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.action_open_webview -> {
+                openWebView()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun setupComponent() {
@@ -75,5 +94,9 @@ class FruitListActivity : AppCompatActivity(), FruitListContract.View {
                 )
             )
         )
+    }
+
+    private fun openWebView() {
+        startActivity(Intent(this, WebviewActivity::class.java))
     }
 }
