@@ -14,6 +14,7 @@ import androidx.test.espresso.matcher.BoundedMatcher
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.android.nsystem.testapps.R
+import com.android.nsystem.testapps.webview.WebviewActivity
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf
@@ -126,6 +127,17 @@ class FruitListActivityTest {
                 101.44729466832969)
             ))
         )
+    }
+
+    @Test // Intent
+    fun actionWebView_shouldOpen_webViewActivity() {
+        // given
+
+        // when
+        onView(withId(R.id.action_open_webview)).perform(click())
+
+        // then
+        intended(hasComponent(WebviewActivity::class.java.name))
     }
 
     private fun hasFruitDataForPosition(position: Int, fruit: Fruit): Matcher<View> {
