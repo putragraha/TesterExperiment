@@ -54,21 +54,6 @@ class LoginPresenterTest {
     }
 
     @Test
-    fun submitLogin_shouldCall_notifyLoginValid_inView() {
-        testDispatcher.runBlockingTest {
-            // given
-            val account = Account(value, value)
-
-            // when
-            presenter.submitLogin(account)
-            advanceTimeBy(2000)
-
-            // then
-            verify(view).notifyLoginValid()
-        }
-    }
-
-    @Test
     fun isLoginInputValid_withEmpty_username_shouldReturn_false() {
         // given
         val account = Account("", value)
@@ -90,51 +75,6 @@ class LoginPresenterTest {
 
         // then
         assertFalse(isLoginInputValid)
-    }
-
-    @Test
-    fun submitLogin_withEmpty_username_shouldNotCall_notifyLoginValid_inView() {
-        testDispatcher.runBlockingTest {
-            // given
-            val account = Account("", value)
-
-            // when
-            presenter.submitLogin(account)
-            advanceTimeBy(2000)
-
-            // then
-            verify(view, times(0)).notifyLoginValid()
-        }
-    }
-
-    @Test
-    fun submitLogin_withEmpty_password_shouldNotCall_notifyLoginValid_inView() {
-        testDispatcher.runBlockingTest {
-            // given
-            val account = Account(value, "")
-
-            // when
-            presenter.submitLogin(account)
-            advanceTimeBy(2000)
-
-            // then
-            verify(view, times(0)).notifyLoginValid()
-        }
-    }
-
-    @Test
-    fun submitLogin_shouldCall_clearLoginInput_inView() {
-        testDispatcher.runBlockingTest {
-            // given
-            val account = Account(value, value)
-
-            // when
-            presenter.submitLogin(account)
-            advanceTimeBy(2000)
-
-            // then
-            verify(view).clearLoginInput()
-        }
     }
 
     @Test
@@ -168,7 +108,22 @@ class LoginPresenterTest {
     }
 
     @Test
-    fun submitLogin_withEmpty_username_shouldNotCall_clearLoginInput_inView() {
+    fun submitLogin_shouldCall_notifyLoginValid_inView() {
+        testDispatcher.runBlockingTest {
+            // given
+            val account = Account(value, value)
+
+            // when
+            presenter.submitLogin(account)
+            advanceTimeBy(2000)
+
+            // then
+            verify(view).notifyLoginValid()
+        }
+    }
+
+    @Test
+    fun submitLogin_withEmpty_username_shouldNotCall_notifyLoginValid_inView() {
         testDispatcher.runBlockingTest {
             // given
             val account = Account("", value)
@@ -178,12 +133,12 @@ class LoginPresenterTest {
             advanceTimeBy(2000)
 
             // then
-            verify(view, times(0)).clearLoginInput()
+            verify(view, times(0)).notifyLoginValid()
         }
     }
 
     @Test
-    fun submitLogin_withEmpty_password_shouldNotCall_clearLoginInput_inView() {
+    fun submitLogin_withEmpty_password_shouldNotCall_notifyLoginValid_inView() {
         testDispatcher.runBlockingTest {
             // given
             val account = Account(value, "")
@@ -193,7 +148,7 @@ class LoginPresenterTest {
             advanceTimeBy(2000)
 
             // then
-            verify(view, times(0)).clearLoginInput()
+            verify(view, times(0)).notifyLoginValid()
         }
     }
 

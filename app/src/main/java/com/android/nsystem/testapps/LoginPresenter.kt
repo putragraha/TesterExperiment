@@ -18,10 +18,7 @@ class LoginPresenter(private val view: LoginContract.View): LoginContract.Presen
             delay(2000)
             view.dismissProgress()
             if (isLoginInputValid(account)) {
-                view.run {
-                    notifyLoginValid()
-                    clearLoginInput()
-                }
+                view.notifyLoginValid()
             }
         }
     }

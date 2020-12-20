@@ -10,8 +10,6 @@ interface LoginContract {
 
         fun notifyLoginValid()
 
-        fun clearLoginInput()
-
         fun enableLoginButton()
 
         fun disableLoginButton()

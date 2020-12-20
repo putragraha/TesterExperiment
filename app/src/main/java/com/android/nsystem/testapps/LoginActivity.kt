@@ -49,16 +49,6 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         startActivity(Intent(this, FruitListActivity::class.java))
     }
 
-    // TODO: 20/12/20 Remove this later
-    // TODO: 20/12/20 check the UI Test after removal
-    // TODO: 20/12/20 check the Unit Test after removal
-    override fun clearLoginInput() {
-        binding.run {
-            username.text.clear()
-            password.text.clear()
-        }
-    }
-
     override fun enableLoginButton() {
         binding.login.run {
             isEnabled = true
