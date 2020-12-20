@@ -15,6 +15,10 @@ interface LoginContract {
         fun enableLoginButton()
 
         fun disableLoginButton()
+
+        fun showProgress()
+
+        fun dismissProgress()
     }
 
     interface Presenter {

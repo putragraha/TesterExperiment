@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.Toast
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.android.nsystem.testapps.databinding.ActivityMainBinding
 import com.android.nsystem.testapps.fruit.FruitListActivity
@@ -49,6 +49,9 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         startActivity(Intent(this, FruitListActivity::class.java))
     }
 
+    // TODO: 20/12/20 Remove this later
+    // TODO: 20/12/20 check the UI Test after removal
+    // TODO: 20/12/20 check the Unit Test after removal
     override fun clearLoginInput() {
         binding.run {
             username.text.clear()
@@ -68,6 +71,14 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
             isEnabled = false
             alpha = 0.5f
         }
+    }
+
+    override fun showProgress() {
+        binding.pbLoadSubmit.visibility = View.VISIBLE
+    }
+
+    override fun dismissProgress() {
+        binding.pbLoadSubmit.visibility = View.GONE
     }
 
     private fun setupComponent() {
