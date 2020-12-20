@@ -1,5 +1,6 @@
 package com.android.nsystem.testapps
 
+import com.android.nsystem.testapps.utils.EspressoIdlingResource
 import kotlinx.coroutines.*
 
 /**
@@ -13,9 +14,11 @@ class LoginPresenter(private val view: LoginContract.View): LoginContract.Presen
     }
 
     override fun submitLogin(account: Account) {
+        EspressoIdlingResource.increment()
         CoroutineScope(Dispatchers.Main).launch {
             view.showProgress()
             delay(2000)
+            EspressoIdlingResource.decrement()
             view.dismissProgress()
             if (isLoginInputValid(account)) {
                 view.notifyLoginValid()

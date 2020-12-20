@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Instrumentation
 import android.content.Intent
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -15,6 +16,7 @@ import androidx.test.espresso.matcher.ViewMatchers.isEnabled
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.android.nsystem.testapps.fruit.FruitListActivity
+import com.android.nsystem.testapps.utils.EspressoIdlingResource
 import org.hamcrest.Matchers.not
 import org.junit.After
 import org.junit.Before
@@ -36,6 +38,7 @@ class LoginActivityTest {
     fun setUp() {
         loginActivity.scenario
         Intents.init()
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.countingIdlingResouce)
     }
 
     @Test
@@ -83,5 +86,6 @@ class LoginActivityTest {
     @After
     fun tearDown() {
         Intents.release()
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.countingIdlingResouce)
     }
 }
