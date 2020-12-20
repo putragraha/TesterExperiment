@@ -1,6 +1,7 @@
 package com.android.nsystem.testapps
 
-import com.nhaarman.mockitokotlin2.times
+import android.os.SystemClock
+import android.text.TextUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
@@ -13,17 +14,23 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers.anyString
 import org.mockito.InjectMocks
 import org.mockito.Mock
+import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
-import org.mockito.runners.MockitoJUnitRunner
+import org.powermock.api.mockito.PowerMockito.`when`
+import org.powermock.api.mockito.PowerMockito.mockStatic
+import org.powermock.core.classloader.annotations.PrepareForTest
+import org.powermock.modules.junit4.PowerMockRunner
 
 /**
  * @author Putra Nugraha (putra.nugraha@dana.id)
  * @version LoginPresenterTest, v 0.1 14/12/20 01.14 by Putra Nugraha
  */
 @ExperimentalCoroutinesApi
-@RunWith(MockitoJUnitRunner::class)
+@RunWith(PowerMockRunner::class)
+@PrepareForTest(SystemClock::class, TextUtils::class)
 class LoginPresenterTest {
 
     @InjectMocks
@@ -34,10 +41,14 @@ class LoginPresenterTest {
 
     private val value by lazy { "mock" }
 
+    private val mockNumber by lazy { 2L }
+
     private val testDispatcher = TestCoroutineDispatcher()
 
     @Before
     fun setUp() {
+        stubTextUtilsIsEmpty()
+        stubSystemClockUptimeMillis()
         Dispatchers.setMain(testDispatcher)
     }
 
@@ -186,6 +197,19 @@ class LoginPresenterTest {
 
         // then
         verify(view).disableLoginButton()
+    }
+
+    private fun stubTextUtilsIsEmpty() {
+        mockStatic(TextUtils::class.java)
+        `when`(TextUtils.isEmpty(anyString())).thenAnswer {
+            val text = it.arguments[0] as String
+            text.isEmpty()
+        }
+    }
+
+    private fun stubSystemClockUptimeMillis() {
+        mockStatic(SystemClock::class.java)
+        `when`(SystemClock.uptimeMillis()).thenReturn(mockNumber)
     }
 
     @After
